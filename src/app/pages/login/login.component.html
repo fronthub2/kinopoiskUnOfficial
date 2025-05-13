@@ -1,0 +1,37 @@
+<div class="container">
+  <h2 class="title">KinoTrip</h2>
+  <form
+    tuiAppearance="floating"
+    tuiCardLarge
+    tuiForm="m"
+    (ngSubmit)="onSubmit()"
+    [formGroup]="form"
+  >
+    <tui-textfield>
+      <label tuiLabel>Меня зовут?</label>
+      <input
+        formControlName="name"
+        placeholder="Введите свое имя"
+        tuiTextfield
+        [invalid]="isError$ | async"
+      />
+    </tui-textfield>
+    @if (isError$ | async) {
+    <tui-error [error]="form.controls.name.errors | errorName" />
+    }
+    <button
+      tuiButton
+      size="s"
+      appearance="outline"
+      [loading]="loading$ | async"
+    >
+      Войти
+    </button>
+  </form>
+</div>
+<!-- 
+<mat-error *ngIf="form.controls['name'].errors"
+            >{{form.controls['name'].errors | vexMatError}}
+          </mat-error>
+
+-->
