@@ -6,7 +6,7 @@ import {
   signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import {
   TuiAppearance,
   TuiBreakpointService,
@@ -35,6 +35,7 @@ import { headerItems, IHeaderItem } from './layout.models';
     FormsModule,
     RouterLink,
     AsyncPipe,
+    RouterOutlet
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',

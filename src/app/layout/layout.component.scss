@@ -1,3 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .header {
   position: sticky;
   display: flex;
@@ -25,6 +31,17 @@
 
 .header__search {
   width: 300px;
+}
+
+.main {
+  flex: 1 0 auto;
+  padding: 1rem;
+}
+
+.footer {
+  flex-shrink: 0; // Не сжимается
+  padding: 1rem;
+  text-align: center;
 }
 
 .drawer {

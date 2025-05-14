@@ -15,11 +15,7 @@
     <tui-icon icon="@tui.menu"></tui-icon>
   </button>
   }
-  <h1
-    class="header__logo custom-padding-inline"
-  >
-    KinoTrip
-  </h1>
+  <h1 class="header__logo custom-padding-inline">KinoTrip</h1>
   @if (bp === 'desktopLarge') {
   <div tuiItemGroup>
     @for (item of items; track item) {
@@ -48,7 +44,7 @@
       <tui-textfield tuiTextfieldSize="s">
         <label tuiLabel>Поиск</label>
         <input tuiTextfield />
-        
+
         <tui-icon icon="@tui.search" [style.fontSize.px]="20" />
       </tui-textfield>
     </div>
@@ -56,7 +52,6 @@
     <tui-avatar size="m">B</tui-avatar>
   </div>
 </header>
-}
 
 <tui-drawer
   *tuiPopup="open()"
@@ -101,3 +96,12 @@
     }
   </div>
 </tui-drawer>
+
+<div class="main">
+  <router-outlet></router-outlet>
+</div>
+
+<footer tuiAppearance="primary" class="footer">
+  <p class="footer-title">© 2025 KinoTrip (не является коммерческим продуктом)</p>
+</footer>
+}
