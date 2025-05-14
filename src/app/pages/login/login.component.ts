@@ -1,11 +1,12 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TUI_FALSE_HANDLER } from '@taiga-ui/cdk';
 import {
   TuiAppearance,
@@ -25,6 +26,10 @@ import {
   timer,
 } from 'rxjs';
 import { ErrorNamePipe } from '../../pipes/error-name.pipe';
+import {
+  IUser,
+  LocalStorageService,
+} from '../../services/localstorage.service';
 
 @Component({
   selector: 'app-login',
@@ -48,6 +53,9 @@ export class LoginComponent {
   private trigger$ = new Subject<void>();
   isError$ = new BehaviorSubject<boolean>(false);
 
+  private router = inject(Router);
+  private lsService = inject(LocalStorageService);
+
   form = new FormGroup(
     {
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -63,7 +71,12 @@ export class LoginComponent {
         map(TUI_FALSE_HANDLER),
         startWith('Loading'),
         finalize(() => {
-          console.log(this.form.controls.name.value);
+          const user: IUser = {
+            name: this.form.controls.name.value as string,
+            favoritesFilms: [],
+          };
+          this.lsService.setUser(user);
+          this.router.navigate(['']);
           this.form.reset();
         })
       )
