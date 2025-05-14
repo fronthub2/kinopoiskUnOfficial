@@ -1,0 +1,35 @@
+.header {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-large {
+  padding: 0.5rem 1.5rem;
+}
+
+.header-small {
+  padding: 0.5rem;
+
+  .custom-padding-inline {
+    padding: 0 1rem;
+  }
+}
+
+.header__accessories {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.header__search {
+  width: 300px;
+}
+
+.drawer {
+  top: 0;
+  border-radius: 0;
+  inline-size: 20rem;
+}
+

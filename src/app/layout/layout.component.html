@@ -1,1 +1,103 @@
-<p>layout works!</p>
+@if (breakpoint$ | async; as bp) {
+<header
+  tuiAppearance="floating"
+  class="header"
+  [class.header-large]="bp === 'desktopLarge'"
+  [class.header-small]="bp === 'desktopSmall' || bp === 'mobile'"
+>
+  @if(bp === 'desktopSmall' || bp === 'mobile') {
+  <button
+    tuiButton
+    appearance="outline"
+    [size]="'s'"
+    (click)="open.set(!open())"
+  >
+    <tui-icon icon="@tui.menu"></tui-icon>
+  </button>
+  }
+  <h1
+    class="header__logo custom-padding-inline"
+  >
+    KinoTrip
+  </h1>
+  @if (bp === 'desktopLarge') {
+  <div tuiItemGroup>
+    @for (item of items; track item) {
+    <label
+      tuiChip
+      size="s"
+      [appearance]="item.title === selected ? 'primary' : 'outline'"
+      [routerLink]="item.link"
+    >
+      {{ item.title }}
+      <input
+        appearance=""
+        name="radio"
+        tuiChip
+        type="radio"
+        [value]="item.title"
+        [(ngModel)]="selected"
+      />
+    </label>
+    }
+  </div>
+  }
+  <div class="header__accessories">
+    @if (bp === 'desktopLarge') {
+    <div class="header__search">
+      <tui-textfield tuiTextfieldSize="s">
+        <label tuiLabel>Поиск</label>
+        <input tuiTextfield />
+        
+        <tui-icon icon="@tui.search" [style.fontSize.px]="20" />
+      </tui-textfield>
+    </div>
+    }
+    <tui-avatar size="m">B</tui-avatar>
+  </div>
+</header>
+}
+
+<tui-drawer
+  *tuiPopup="open()"
+  direction="left"
+  class="drawer"
+  [overlay]="true"
+  (click.self)="onClose()"
+>
+  <header class="header">
+    <ng-container>
+      <tui-textfield
+        tuiTextfieldSize="m"
+        [style.maxWidth.px]="400"
+        [style.width.%]="100"
+      >
+        <label tuiLabel>Поиск</label>
+        <input tuiTextfield />
+        <tui-icon icon="@tui.search" [style.fontSize.px]="20" />
+      </tui-textfield>
+    </ng-container>
+  </header>
+
+  <div tuiItemGroup [style.flexDirection]="'column'">
+    @for (item of items; track item) {
+    <label
+      tuiChip
+      size="s"
+      [appearance]="item.title === selected ? 'primary' : 'outline'"
+      [routerLink]="item.link"
+      [style.width.%]="100"
+    >
+      {{ item.title }}
+      <input
+        appearance=""
+        name="radio"
+        tuiChip
+        type="radio"
+        [value]="item.title"
+        [(ngModel)]="selected"
+      />
+    </label>
+    }
+  </div>
+</tui-drawer>
