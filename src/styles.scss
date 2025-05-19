@@ -8,6 +8,12 @@ h1 {
   margin: 0;
 }
 
-p {
+h3 {
   margin: 0;
+  font-size:calc(18px + 8 * (100vw - 320px) / 880);
+}
+
+p { 
+  margin: 0;
+  font-size:calc(12px + 8 * (100vw - 320px) / 880);
 }

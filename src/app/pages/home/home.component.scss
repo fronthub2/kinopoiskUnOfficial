@@ -1,0 +1,36 @@
+.container-large {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-items: center;
+  column-gap: 5px;
+  row-gap: 15px;
+}
+
+.container-small {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .card {
+    position: relative;
+    display: flex;
+    justify-content: left;
+    gap: 25px;
+    align-items: stretch;
+    border-radius: 20px;
+  }
+}
+
+.container-mobile {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  justify-items: center;
+  column-gap: 5px;
+  row-gap: 15px;
+
+  .card {
+    border-radius: 20px;
+  }
+}
+
+

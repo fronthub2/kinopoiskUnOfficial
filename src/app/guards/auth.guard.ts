@@ -9,15 +9,13 @@ export const authGuard: CanActivateFn = (route, state) => {
     if (user) {
       return true;
     } else {
-      router.navigate(['/login']);
-      return false;
+      return router.createUrlTree(['/login']);
     }
   }
 
   if (state.url === '/login') {
     if (user) {
-      router.navigate(['']);
-      return false;
+      return router.createUrlTree(['']);
     } else {
       return true;
     }
@@ -26,7 +24,6 @@ export const authGuard: CanActivateFn = (route, state) => {
   if (user) {
     return true;
   } else {
-    router.navigate(['/login']);
-    return false;
+    return router.createUrlTree(['/login']);
   }
 };
