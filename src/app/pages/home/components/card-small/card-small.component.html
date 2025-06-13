@@ -1,0 +1,87 @@
+<button
+  [style]="{
+    position: 'absolute',
+    borderRadius: '100%',
+    right: '10px',
+    top: '10px',
+    color: isFavoriteFilm ? 'green' : 'red'
+  }"
+  appearance="outline"
+  iconStart="@tui.heart"
+  size="xs"
+  tuiIconButton
+  (click)="addFavorite(film)"
+></button>
+<button
+  [style]="{
+      position: 'absolute',
+      borderRadius: '100%',
+      right: '50px',
+      top: '10px',
+    }"
+  appearance="outline"
+  iconStart="@tui.external-link"
+  size="xs"
+  tuiIconButton
+></button>
+<div
+  [style.maxHeight.px]="300"
+  [style.maxWidth.px]="200"
+  [style.minWidth.px]="162"
+>
+  <img
+    [style.borderRadius.px]="20"
+    [style.width.%]="100"
+    [style.height.%]="100"
+    [src]="film.posterUrlPreview"
+    [alt]="film.nameRu"
+  />
+</div>
+<div
+  [style]="{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+          justifyContent: 'center',
+          width: '100%',
+        }"
+>
+  <h3>{{ film.nameRu }}</h3>
+  <div
+    [style]="{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '5px',
+      flexWrap: 'wrap'
+    }"
+  >
+    @if (film.ratingKinopoisk) { @if (film.ratingKinopoisk < 6) {
+    <tui-icon
+      [style.fontSize.px]="20"
+      [style.color]="'red'"
+      icon="@tui.frown"
+    ></tui-icon>
+    } @else if (film.ratingKinopoisk >= 6 && film.ratingKinopoisk < 8) {
+    <tui-icon
+      [style.fontSize.px]="20"
+      [style.color]="'orange'"
+      icon="@tui.meh"
+    ></tui-icon>
+    } @else if (film.ratingKinopoisk >= 8) {
+    <tui-icon
+      [style.fontSize.px]="20"
+      [style.color]="'green'"
+      icon="@tui.smile"
+    ></tui-icon>
+    } } @else {
+    <tui-icon [style.fontSize.px]="20" icon="@tui.annoyed"></tui-icon>
+    }
+    <p>
+      {{ film.ratingKinopoisk }}
+    </p>
+    <p class="genres">( {{ film.genres | genres: 3 }} )</p>
+  </div>
+  <p [style.maxWidth.px]="500" [style.textWrapStyle]="'balance'">
+    {{ film.description | sliceText }}
+  </p>
+</div>

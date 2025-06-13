@@ -1,132 +1,48 @@
-@if (breakpoint$ | async; as bp) { @if (bp !== 'desktopSmall' && bp !==
-'mobile') {
-<div class="container-large">
-  @for (item of items$ | async; track item) {
-  <div
-    tuiAppearance="floating"
-    tuiCardLarge
-    [style.gap.px]="0"
-    [style.width.px]="250"
-    [style.padding.px]="0"
-  >
-    <div tuiHeader [style.height.px]="373">
-      <img
-        [style.width.%]="100"
-        [style.height.%]="100"
-        [src]="item.posterUrlPreview"
-        [alt]="item.nameRu"
-      />
+@if (breakpoint$ | async; as bp) { 
+  <h2>Подборка</h2>
+  @if (bp !== 'desktopSmall' && bp !== 'mobile') {
+    <div class="container-large">
+      @for (film of films$ | async; track film.kinopoiskId) {
+        <app-card-large
+          [film]="film"
+          (moreFilm)="moreFilm($event)"
+          tuiAppearance="textfield"
+          tuiCardLarge
+          [style.gap.px]="0"
+          [style.width.px]="250"
+          [style.padding.px]="0"
+        ></app-card-large>
+      }
     </div>
-    <h4 [style.margin.px]="0" [style.padding.px]="20">
-      {{ item.nameRu }}
-    </h4>
+  } @else if (bp !== 'mobile') {
+    <div class="container-small">
+      @for (film of films$ | async; track film.kinopoiskId) {
+        <app-card-small
+          tuiAppearance="floating"
+          class="card"
+          [film]="film"
+          [isFavoriteFilm]="hasFavoriteFilm(film.kinopoiskId)"
+          (favoriteFilm)="addFavorite($event)"
+        ></app-card-small>
+      }
+    </div>
+  } @else {
+    <div class="container-mobile">
+      @for (film of films$ | async; track film.kinopoiskId) {
+        <app-card-mobile
+          tuiAppearance="floating"
+          class="card"
+          [film]="film"
+        ></app-card-mobile>
+      }
+    </div>
+  } 
+  
+  <div [style.margin]="'20px 0'">
+    <app-pagination
+      [page]="page"
+      [totalPages]="totalPages"
+      (changePage)="goToPage($event)"
+   ></app-pagination>
   </div>
-  }
-</div>
-} @else if (bp !== 'mobile') {
-<div class="container-small">
-  @for (item of items$ | async; track item) {
-  <div tuiAppearance="floating" class="card">
-    <button
-      (click)="addFavorite(item)"
-      [style]="{
-        position: 'absolute',
-        borderRadius: '100%',
-        right: '10px',
-        top: '10px',
-        color: hasFavoriteFilm(item.kinopoiskId) ? 'green' : 'red'
-      }"
-      appearance="outline"
-      iconStart="@tui.heart"
-      size="xs"
-      tuiIconButton
-    ></button>
-    <div
-      [style.maxHeight.px]="300"
-      [style.maxWidth.px]="200"
-      [style.minWidth.px]="162"
-    >
-      <img
-        [style.borderRadius.px]="20"
-        [style.width.%]="100"
-        [style.height.%]="100"
-        [src]="item.posterUrlPreview"
-        [alt]="item.nameRu"
-      />
-    </div>
-    <div
-      [style]="{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '10px',
-          justifyContent: 'center',
-          width: '100%',
-        }"
-    >
-      <h3>{{ item.nameRu }}</h3>
-      <div
-        [style]="{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '5px',
-          flexWrap: 'wrap'
-        }"
-      >
-        @if (item.ratingKinopoisk) { @if (item.ratingKinopoisk >= 4 &&
-        item.ratingKinopoisk < 6) {
-        <tui-icon
-          [style.fontSize.px]="20"
-          [style.color]="'red'"
-          icon="@tui.frown"
-        ></tui-icon>
-        } @else if (item.ratingKinopoisk >= 6 && item.ratingKinopoisk < 8) {
-        <tui-icon
-          [style.fontSize.px]="20"
-          [style.color]="'orange'"
-          icon="@tui.meh"
-        ></tui-icon>
-        } @else if (item.ratingKinopoisk >= 8) {
-        <tui-icon
-          [style.fontSize.px]="20"
-          [style.color]="'green'"
-          icon="@tui.smile"
-        ></tui-icon>
-        } } @else {
-        <tui-icon [style.fontSize.px]="20" icon="@tui.annoyed"></tui-icon>
-        }
-        <p>
-          {{ item.ratingKinopoisk }}
-        </p>
-        <p class="genres">( {{ item.genres | genres }} )</p>
-      </div>
-      <p
-        [style.maxWidth.px]="500"
-        [style.textWrapStyle]="'balance'"
-      >
-        {{ item.description | sliceText }}
-      </p>
-    </div>
-  </div>
-  }
-</div>
-} @else {
-<div class="container-mobile">
-  @for (item of items$ | async; track item) {
-  <div tuiAppearance="floating" class="card">
-    <div
-      [style.height.px]="300"
-      [style.width.px]="200"
-      [style.minWidth.px]="162"
-    >
-      <img
-        [style.borderRadius.px]="20"
-        [style.width.%]="100"
-        [style.height.%]="100"
-        [src]="item.posterUrlPreview"
-        [alt]="item.nameRu"
-      />
-    </div>
-  </div>
-  }
-</div>
-} }
+}

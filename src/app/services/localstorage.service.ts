@@ -1,11 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { IFilm } from './films.service';
-
-export interface IUser {
-  name: string;
-  favoritesFilms: IFilm[];
-}
+import { IFilm } from '../interface/films.interface';
+import { IUser } from '../interface/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +26,7 @@ export class LocalStorageService {
     localStorage.removeItem('user');
   }
 
-  hasFavoriteFilm(filmId: string): boolean | undefined {
+  hasFavoriteFilm(filmId: number): boolean | undefined {
     const user = this.getUser();
     if (!user) {
       this.router.navigate(['/login']);
@@ -40,7 +36,7 @@ export class LocalStorageService {
     return user.favoritesFilms.some((flm) => flm.kinopoiskId === filmId);
   }
 
-  deleteFavoriteFilm(filmId: string): void {
+  deleteFavoriteFilm(filmId: number): void {
     const user = this.getUser();
     if (!user) {
       this.router.navigate(['/login']);

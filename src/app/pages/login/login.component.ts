@@ -25,11 +25,9 @@ import {
   switchMap,
   timer,
 } from 'rxjs';
+import { IUser } from '../../interface/user.interface';
+import { LocalStorageService } from '../../services/localstorage.service';
 import { ErrorNamePipe } from '../../pipes/error-name.pipe';
-import {
-  IUser,
-  LocalStorageService,
-} from '../../services/localstorage.service';
 
 @Component({
   selector: 'app-login',

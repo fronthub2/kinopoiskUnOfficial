@@ -1,0 +1,56 @@
+@if (film$ | async; as film) {
+  <div>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <h2>{{ film.nameRu }}</h2>
+        <p>{{ film.genres | genres : 3 }}</p>
+      </div>
+  
+      <p>{{ film.ratingKinopoisk }} / 10</p>
+    </div>
+  
+    <div style="display: flex; justify-content: space-between; gap: 20px;">
+  
+      <div style="display: flex; flex-direction: column; gap: 10px; width: 333px;">
+        <img style="width: 333px; height: 500px;" [src]="film.posterUrl" [alt]="film.nameRu" />
+        <button style="width: 100%;" tuiButton appearance="primary" size="s">Смотреть</button>
+      </div>
+  
+      <div>
+        <div>
+          <h3>О фильме</h3>
+          <p>
+            {{ film.description }}
+          </p>
+        </div>
+  
+        <div style="display: flex; justify-content: space-between;">
+          <div style="display: flex; flex-direction: column; gap: 5px;">
+            <h3>Актеры</h3>
+            @for (actor of actors$ | async; track actor.staffId; let index = $index) {
+              @if (index < 11) {
+                <app-staff [staff]="actor"></app-staff>
+              }
+            }
+          </div>
+  
+          <div style="display: flex; flex-direction: column; gap: 5px;">
+            <h3>Режиссер</h3>
+            @for (director of directors$ | async; track director.staffId) {
+              <app-staff [staff]="director"></app-staff>
+            }
+          </div>
+  
+          <div style="display: flex; flex-direction: column; gap: 5px;">
+            <h3>Продюсер</h3>
+            @for (producers of producers$ | async; track producers.staffId; let index = $index) {
+              @if (index < 11) {
+                <app-staff [staff]="producers"></app-staff>
+              }
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}

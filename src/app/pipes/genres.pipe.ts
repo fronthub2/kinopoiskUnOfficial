@@ -9,10 +9,9 @@ interface IGenres {
 })
 export class GenresPipe implements PipeTransform {
 
-  transform(genres: IGenres[]): string[] {
-    const genre = genres.map((genre) => genre.genre).slice(0,3);
+  transform(genres: IGenres[], lastIndex:number): string[] {
+    const genre = genres.map((genre) => genre.genre).slice(0, lastIndex);
 
     return genre;
   }
-
 }

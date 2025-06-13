@@ -1,0 +1,24 @@
+<a
+  [tuiDropdown]="drop"
+  tuiDropdownHover
+  [tuiDropdownOffset]="-200"
+  tuiDropdownLimitWidth="auto"
+>
+  {{ staff.nameRu }}
+</a>
+
+<ng-template #drop>
+  <div
+    [style]="{
+      maxWidth: '120px',
+      maxHeight: '170px'
+    }"
+  >
+    <img
+      [style.width.%]="100"
+      [style.height.%]="100"
+      [src]="staff.posterUrl"
+      [alt]="staff.nameRu"
+    />
+  </div>
+</ng-template>
