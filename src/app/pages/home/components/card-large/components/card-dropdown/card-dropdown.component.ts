@@ -1,38 +1,25 @@
 import { AsyncPipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit
-} from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { TuiButton, TuiDialogContext, TuiDropdown } from '@taiga-ui/core';
 import { POLYMORPHEUS_CONTEXT } from '@taiga-ui/polymorpheus';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
-import {
-  IDialogFilm,
-  IFilm,
-  IStaff,
-  ProffessionKey,
-} from '../../../interface/films.interface';
-import { CountryPipe } from '../../../pipes/country.pipe';
-import { GenresPipe } from '../../../pipes/genres.pipe';
-import { StaffComponent } from './components/staff/staff.component';
+import { IDialogFilm, IFilm, IStaff, ProffessionKey } from '../../../../../../interface/films.interface';
+import { GenresPipe } from '../../../../../../pipes/genres.pipe';
+import { CardDropDownStaffComponent } from './card-dropdown-staff/card-dropdown-staff.component';
 
 @Component({
-  selector: 'app-dialog',
+  selector: 'app-card-dropdown',
   imports: [
     GenresPipe,
-    CountryPipe,
     TuiButton,
     AsyncPipe,
     TuiDropdown,
-    StaffComponent,
+    CardDropDownStaffComponent
   ],
-  templateUrl: './dialog.component.html',
-  styleUrl: './dialog.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './card-dropdown.component.html',
+  styleUrl: './card-dropdown.component.scss'
 })
-export class DialogComponent implements OnInit {
+export class CardDropdownComponent implements OnInit {
   private dialogContext = inject<TuiDialogContext<void, IDialogFilm>>(POLYMORPHEUS_CONTEXT);
   private _film = new BehaviorSubject<IFilm | null>(null);
   private staff$: Observable<IStaff[]> = this.dialogContext.data.staff;

@@ -1,0 +1,77 @@
+@if (film$ | async; as film) {
+<div class="film-details">
+    <div class="film-details__header">
+    <div class="film-details__info">
+        <h2 class="film-details__title">{{ film.nameRu }}</h2>
+        <p class="film-details__genres">{{ film.genres | genres : 3 }}</p>
+    </div>
+    @if (film.ratingKinopoisk) {
+        <p class="film-details__rating">{{ film.ratingKinopoisk }} / 10</p>
+    } @else {
+        <p class="film-details__rating">Без рейтинга</p>
+    }
+    </div>
+
+    <div class="film-details__content">
+    <div class="film-details__poster-section">
+        <img
+        class="film-details__poster"
+        [src]="film.posterUrl"
+        [alt]="film.nameRu"
+        />
+        <button
+        class="film-details__watch-button"
+        tuiButton
+        appearance="primary"
+        size="s"
+        >
+        Смотреть
+        </button>
+    </div>
+
+    <div class="film-details__description-section">
+        <div class="film-details__about">
+        <h4 class="film-details__subtitle">О фильме</h4>
+        <p class="film-details__text">{{ film.description }}</p>
+        </div>
+
+        <div class="film-details__crew">
+        <div class="film-details__crew-group">
+            <h4 class="film-details__subtitle">Актеры</h4>
+            @for (actor of actors$ | async; track actor.staffId; let index = $index) { 
+                @if (actor.nameRu && index < 11) {
+                    <app-card-dropdown-staff 
+                    class="film-details__staff" 
+                    [staff]="actor"
+                    ></app-card-dropdown-staff>
+                } 
+            }
+        </div>
+
+        <div class="film-details__crew-group">
+            <h4 class="film-details__subtitle">Режиссер</h4>
+            @for (director of directors$ | async; track director.staffId) {
+                @if (director.nameRu) {
+                    <app-card-dropdown-staff 
+                    class="film-details__staff" [staff]="director"
+                    ></app-card-dropdown-staff>
+                }
+            }
+        </div>
+
+        <div class="film-details__crew-group">
+            <h4 class="film-details__subtitle">Продюсер</h4>
+            @for (producer of producers$ | async; track producer.staffId; let index = $index) { 
+                @if (producer.nameRu && index < 11) {
+                    <app-card-dropdown-staff
+                    class="film-details__staff"
+                    [staff]="producer"
+                    ></app-card-dropdown-staff>
+                } 
+            }
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+}

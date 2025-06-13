@@ -1,5 +1,10 @@
 @if (breakpoint$ | async; as bp) { 
-  <h2>Подборка</h2>
+  <h2 
+    [style]="{
+      margin: '10px 0'
+    }">
+    Подборка
+  </h2>
   @if (bp !== 'desktopSmall' && bp !== 'mobile') {
     <div class="container-large">
       @for (film of films$ | async; track film.kinopoiskId) {

@@ -1,15 +1,15 @@
 import { AsyncPipe } from '@angular/common';
 import {
-    ChangeDetectionStrategy,
-    Component,
-    inject,
-    OnDestroy,
-    OnInit,
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
 } from '@angular/core';
 import {
-    TuiAppearance,
-    TuiBreakpointService,
-    TuiDialogService,
+  TuiAppearance,
+  TuiBreakpointService,
+  TuiDialogService,
 } from '@taiga-ui/core';
 import { TuiCardLarge } from '@taiga-ui/layout';
 import { PolymorpheusComponent } from '@taiga-ui/polymorpheus';
@@ -17,9 +17,9 @@ import { BehaviorSubject, map, Subject, takeUntil, tap } from 'rxjs';
 import { IFilm, IResponce } from '../../interface/films.interface';
 import { FilmsService } from '../../services/films.service';
 import { LocalStorageService } from '../../services/localstorage.service';
-import { DialogComponent } from '../../shared/components/dialog/dialog.component';
-import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
+import { PaginationComponent } from '../../shared/pagination/pagination.component';
 import { CardLargeComponent } from './components/card-large/card-large.component';
+import { CardDropdownComponent } from './components/card-large/components/card-dropdown/card-dropdown.component';
 import { CardMobileComponent } from './components/card-mobile/card-mobile.component';
 import { CardSmallComponent } from './components/card-small/card-small.component';
 
@@ -94,7 +94,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     const staff = this.fimlsService.getStaffFilm(film.kinopoiskId);
 
     this.dialogService
-      .open(new PolymorpheusComponent(DialogComponent), {
+      .open(new PolymorpheusComponent(CardDropdownComponent), {
         data: {
           film,
           staff,
