@@ -3,10 +3,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
+  OnInit,
   signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import {
   TuiAppearance,
   TuiBreakpointService,
@@ -41,14 +42,19 @@ import { headerItems, IHeaderItem } from './layout.models';
   styleUrl: './layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutComponent {
-  breakpoint$ = inject(TuiBreakpointService);
-  items: IHeaderItem[] = headerItems;
-  selected = 'Главная';
-
+export class LayoutComponent implements OnInit {
+  private route = inject(Router);
   protected readonly open = signal(false);
 
-  public onClose(): void {
+  breakpoint$ = inject(TuiBreakpointService);
+  items: IHeaderItem[] = headerItems;
+  currentLink!:string;
+
+  ngOnInit(): void {
+    this.currentLink = this.route.url;
+  }
+
+  onClose(): void {
     this.open.set(false);
   }
 }

@@ -23,7 +23,7 @@
     <label
       tuiChip
       size="s"
-      [appearance]="item.title === selected ? 'primary' : 'outline'"
+      [appearance]="item.link === currentLink ? 'primary' : 'outline'"
       [routerLink]="item.link"
     >
       {{ item.title }}
@@ -32,8 +32,8 @@
         name="radio"
         tuiChip
         type="radio"
-        [value]="item.title"
-        [(ngModel)]="selected"
+        [value]="item.link"
+        [(ngModel)]="currentLink"
       />
     </label>
     }
@@ -80,7 +80,7 @@
     <label
       tuiChip
       size="s"
-      [appearance]="item.title === selected ? 'primary' : 'outline'"
+      [appearance]="item.link === currentLink ? 'primary' : 'outline'"
       [routerLink]="item.link"
       [style.width.%]="100"
     >
@@ -90,8 +90,8 @@
         name="radio"
         tuiChip
         type="radio"
-        [value]="item.title"
-        [(ngModel)]="selected"
+        [value]="item.link"
+        [(ngModel)]="currentLink"
       />
     </label>
     }

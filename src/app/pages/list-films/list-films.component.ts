@@ -33,7 +33,7 @@ import { CardSmallComponent } from './components/card-small/card-small.component
     CardSmallComponent,
     CardMobileComponent,
     PaginationComponent,
-  ],
+],
   templateUrl: './list-films.component.html',
   styleUrl: './list-films.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,6 +49,7 @@ export class ListFilmsComponent implements OnInit, OnDestroy {
   breakpoint$ = inject(TuiBreakpointService);
 
   films$ = this._films.asObservable();
+
 
   page: number = 0;
   totalPages: number = 10;

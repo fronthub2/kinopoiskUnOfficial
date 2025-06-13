@@ -6,11 +6,11 @@ export interface IHeaderItem {
 export const headerItems: IHeaderItem[] = [
   {
     title: 'Главная',
-    link: '/',
+    link: '/home',
   },
   {
     title: 'Подборка',
-    link: '/login',
+    link: '/collections',
   },
   {
     title: 'Трейлеры',

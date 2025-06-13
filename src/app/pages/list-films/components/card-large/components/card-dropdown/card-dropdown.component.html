@@ -27,6 +27,14 @@
         >
         Смотреть
         </button>
+        <button
+        class="film-details__watch-button"
+        tuiButton
+        appearance="outline"
+        size="s"
+        >
+        Трейлер
+        </button>
     </div>
 
     <div class="film-details__description-section">
@@ -37,7 +45,7 @@
 
         <div class="film-details__crew">
         <div class="film-details__crew-group">
-            <h4 class="film-details__subtitle">Актеры</h4>
+            <h4 class="film-details__subtitle">Актер</h4>
             @for (actor of actors$ | async; track actor.staffId; let index = $index) { 
                 @if (actor.nameRu) {
                     <app-card-dropdown-staff 

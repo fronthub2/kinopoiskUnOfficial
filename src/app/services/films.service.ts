@@ -9,7 +9,7 @@ import { IResponce, IStaff } from '../interface/films.interface';
 export class FilmsService {
   private http = inject(HttpClient);
 
-  private apiKey: string = 'f125c107-19c1-4160-a04e-f4545ac66ad6';
+  private apiKey: string = 'abf28bc7-2cbe-4d5c-8bfb-82dcce1d01a3';
   private header = {
     'X-API-KEY': this.apiKey,
     'Content-Type': 'application/json',

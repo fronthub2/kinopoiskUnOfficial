@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
 import { LayoutComponent } from './layout/layout.component';
-import { ListFilmsComponent } from './pages/list-films/list-films.component';
 import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
@@ -12,7 +11,16 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: ListFilmsComponent
+        pathMatch: 'full',
+        redirectTo: '/home'
+      },
+      {
+        path: 'collections',
+        loadComponent: () => import('./pages/list-films/list-films.component').then((c) => c.ListFilmsComponent)
+      },
+      {
+        path: 'home',
+        loadComponent: () => import('./pages/home/home.component').then((c) => c.HomeComponent)
       }
     ],
   },
