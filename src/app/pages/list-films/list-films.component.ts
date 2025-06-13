@@ -24,7 +24,7 @@ import { CardMobileComponent } from './components/card-mobile/card-mobile.compon
 import { CardSmallComponent } from './components/card-small/card-small.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-list-films',
   imports: [
     TuiCardLarge,
     TuiAppearance,
@@ -34,11 +34,11 @@ import { CardSmallComponent } from './components/card-small/card-small.component
     CardMobileComponent,
     PaginationComponent,
   ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  templateUrl: './list-films.component.html',
+  styleUrl: './list-films.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class ListFilmsComponent implements OnInit, OnDestroy {
   private fimlsService = inject(FilmsService);
   private lsService = inject(LocalStorageService);
   private dialogService = inject(TuiDialogService);

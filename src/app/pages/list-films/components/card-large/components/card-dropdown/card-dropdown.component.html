@@ -39,7 +39,7 @@
         <div class="film-details__crew-group">
             <h4 class="film-details__subtitle">Актеры</h4>
             @for (actor of actors$ | async; track actor.staffId; let index = $index) { 
-                @if (actor.nameRu && index < 11) {
+                @if (actor.nameRu) {
                     <app-card-dropdown-staff 
                     class="film-details__staff" 
                     [staff]="actor"
@@ -62,7 +62,7 @@
         <div class="film-details__crew-group">
             <h4 class="film-details__subtitle">Продюсер</h4>
             @for (producer of producers$ | async; track producer.staffId; let index = $index) { 
-                @if (producer.nameRu && index < 11) {
+                @if (producer.nameRu) {
                     <app-card-dropdown-staff
                     class="film-details__staff"
                     [staff]="producer"

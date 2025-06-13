@@ -1,0 +1,9 @@
+:host {
+    ::ng-deep {
+        tui-pagination {
+            .t-content {
+                flex-wrap: wrap !important;
+            }
+        }
+    }
+}
