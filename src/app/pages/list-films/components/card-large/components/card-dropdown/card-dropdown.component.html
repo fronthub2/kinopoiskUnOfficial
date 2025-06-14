@@ -4,12 +4,12 @@
     <div class="film-details__info">
         <h2 class="film-details__title">{{ film.nameRu }}</h2>
         <p class="film-details__genres">{{ film.genres | genres : 3 }}</p>
-    </div>
-    @if (film.ratingKinopoisk) {
-        <p class="film-details__rating">{{ film.ratingKinopoisk }} / 10</p>
-    } @else {
-        <p class="film-details__rating">Без рейтинга</p>
-    }
+        @if (film.ratingKinopoisk) {
+            <p class="film-details__rating">{{ film.ratingKinopoisk }} / 10</p>
+        } @else {
+            <p class="film-details__rating">Без рейтинга</p>
+        }
+        </div>
     </div>
 
     <div class="film-details__content">

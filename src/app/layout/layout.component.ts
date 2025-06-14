@@ -12,13 +12,21 @@ import {
   TuiAppearance,
   TuiBreakpointService,
   TuiButton,
+  TuiDataList,
+  TuiDropdown,
   TuiIcon,
   TuiPopup,
-  TuiTextfield
+  TuiTextfield,
 } from '@taiga-ui/core';
 import { TuiAvatar, TuiChip, TuiDrawer } from '@taiga-ui/kit';
 import { TuiItemGroup } from '@taiga-ui/layout';
-import { headerItems, IHeaderItem } from './layout.models';
+import { LocalStorageService } from '../services/localstorage.service';
+import {
+  dropMenuAvatarItems,
+  headerItems,
+  IDropMenuItem,
+  IHeaderItem,
+} from './layout.models';
 
 @Component({
   selector: 'app-layout',
@@ -37,24 +45,36 @@ import { headerItems, IHeaderItem } from './layout.models';
     RouterLink,
     AsyncPipe,
     RouterOutlet,
-],
+    TuiDropdown,
+    TuiDataList,
+  ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutComponent implements OnInit {
   private route = inject(Router);
-  protected readonly open = signal(false);
+  private lsService = inject(LocalStorageService);
+
+  protected readonly openBgMenu = signal(false);
+  protected readonly openDropMenuAvatar = signal(false);
+
+  userName = this.lsService.getUser()?.name as string;
 
   breakpoint$ = inject(TuiBreakpointService);
-  items: IHeaderItem[] = headerItems;
-  currentLink!:string;
+  headerMenuItems: IHeaderItem[] = headerItems;
+  dropMenuAvatarItems: IDropMenuItem[] = dropMenuAvatarItems;
+  currentLink!: string;
 
   ngOnInit(): void {
     this.currentLink = this.route.url;
   }
 
   onClose(): void {
-    this.open.set(false);
+    this.openBgMenu.set(false);
+  }
+
+  onLogout(): void {
+    this.lsService.deleteUser();
   }
 }

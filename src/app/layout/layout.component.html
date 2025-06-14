@@ -1,111 +1,134 @@
 @if (breakpoint$ | async; as bp) {
-  <header
-    tuiAppearance="floating"
-    class="header"
-    [class.header-large]="bp === 'desktopLarge'"
-    [class.header-small]="bp === 'desktopSmall' || bp === 'mobile'"
-    
+<header
+  tuiAppearance="floating"
+  class="header"
+  [class.header-large]="bp === 'desktopLarge'"
+  [class.header-small]="bp === 'desktopSmall' || bp === 'mobile'"
+>
+  @if(bp === 'desktopSmall' || bp === 'mobile') {
+  <button
+    tuiButton
+    appearance="outline"
+    [size]="'s'"
+    (click)="openBgMenu.set(!openBgMenu())"
   >
-    @if(bp === 'desktopSmall' || bp === 'mobile') {
-      <button
-        tuiButton
-        appearance="outline"
-        [size]="'s'"
-        (click)="open.set(!open())"
-      >
-        <tui-icon icon="@tui.menu"></tui-icon>
-      </button>
+    <tui-icon icon="@tui.menu"></tui-icon>
+  </button>
+  }
+  <h1 class="header__logo custom-padding-inline">KinoTrip</h1>
+  @if (bp === 'desktopLarge') {
+  <div tuiItemGroup>
+    @for (item of headerMenuItems; track item) {
+    <label
+      tuiChip
+      size="s"
+      [appearance]="item.link === currentLink ? 'primary' : 'outline'"
+      [routerLink]="item.link"
+    >
+      {{ item.title }}
+      <input
+        appearance=""
+        name="radio"
+        tuiChip
+        type="radio"
+        [value]="item.link"
+        [(ngModel)]="currentLink"
+      />
+    </label>
     }
-    <h1 class="header__logo custom-padding-inline">KinoTrip</h1>
+  </div>
+  }
+  <div class="header__accessories">
     @if (bp === 'desktopLarge') {
-    <div tuiItemGroup>
-      @for (item of items; track item) {
-      <label
-        tuiChip
-        size="s"
-        [appearance]="item.link === currentLink ? 'primary' : 'outline'"
-        [routerLink]="item.link"
-      >
-        {{ item.title }}
-        <input
-          appearance=""
-          name="radio"
-          tuiChip
-          type="radio"
-          [value]="item.link"
-          [(ngModel)]="currentLink"
-        />
-      </label>
-      }
+    <div class="header__search">
+      <tui-textfield tuiTextfieldSize="s">
+        <label tuiLabel>Поиск</label>
+        <input tuiTextfield />
+
+        <tui-icon icon="@tui.search" [style.fontSize.px]="20" />
+      </tui-textfield>
     </div>
     }
-    <div class="header__accessories">
-      @if (bp === 'desktopLarge') {
-      <div class="header__search">
-        <tui-textfield tuiTextfieldSize="s">
-          <label tuiLabel>Поиск</label>
-          <input tuiTextfield />
+    <tui-avatar
+      [style.cursor]="'pointer'"
+      size="m"
+      [tuiDropdown]="dropMenuAvatar"
+      [(tuiDropdownOpen)]="openDropMenuAvatar"
+    >
+      {{ userName.substring(0, 1) }}
+      <ng-template #dropMenuAvatar>
+        <tui-data-list [size]="'s'">
+          @for (item of dropMenuAvatarItems; track item.link) {
+            @if (item.link === '/login') {
+              <button [iconStart]="'@tui.log-out'" [routerLink]="item.link" tuiOption (click)="onLogout()">
+                {{ item.title }}
+              </button>
+            } @else {
+              <button [routerLink]="item.link" tuiOption>
+                {{ item.title }}
+              </button>
+            }
+          }
+        </tui-data-list>
+      </ng-template>
+    </tui-avatar>
+  </div>
+</header>
 
-          <tui-icon icon="@tui.search" [style.fontSize.px]="20" />
-        </tui-textfield>
-      </div>
-      }
-      <tui-avatar size="m">B</tui-avatar>
-    </div>
-  </header>
-
-  <tui-drawer
-    *tuiPopup="open()"
-    direction="left"
-    class="drawer"
-    [overlay]="true"
-    (click.self)="onClose()"
-  >
-    <header class="header">
-      <ng-container>
-        <tui-textfield
-          tuiTextfieldSize="m"
-          [style.maxWidth.px]="400"
-          [style.width.%]="100"
-        >
-          <label tuiLabel>Поиск</label>
-          <input tuiTextfield />
-          <tui-icon icon="@tui.search" [style.fontSize.px]="20" />
-        </tui-textfield>
-      </ng-container>
-    </header>
-
-    <div tuiItemGroup [style.flexDirection]="'column'">
-      @for (item of items; track item) {
-      <label
-        tuiChip
-        size="s"
-        [appearance]="item.link === currentLink ? 'primary' : 'outline'"
-        [routerLink]="item.link"
+<tui-drawer
+  *tuiPopup="openBgMenu()"
+  direction="left"
+  class="drawer"
+  [overlay]="true"
+  (click.self)="onClose()"
+>
+  <header class="header">
+    <ng-container>
+      <tui-textfield
+        tuiTextfieldSize="m"
+        [style.maxWidth.px]="400"
         [style.width.%]="100"
       >
-        {{ item.title }}
-        <input
-          appearance=""
-          name="radio"
-          tuiChip
-          type="radio"
-          [value]="item.link"
-          [(ngModel)]="currentLink"
-          (ngModelChange)="onClose()"
-        />
-      </label>
-      }
-    </div>
-  </tui-drawer>
+        <label tuiLabel>Поиск</label>
+        <input tuiTextfield />
+        <tui-icon icon="@tui.search" [style.fontSize.px]="20" />
+      </tui-textfield>
+    </ng-container>
+  </header>
 
-  <div class="container">
-    <div class="main">
-      <router-outlet></router-outlet>
-    </div>
+  <div tuiItemGroup [style.flexDirection]="'column'">
+    @for (item of headerMenuItems; track item) {
+    <label
+      tuiChip
+      size="s"
+      [appearance]="item.link === currentLink ? 'primary' : 'outline'"
+      [routerLink]="item.link"
+      [style.width.%]="100"
+    >
+      {{ item.title }}
+      <input
+        appearance=""
+        name="radio"
+        tuiChip
+        type="radio"
+        [value]="item.link"
+        [(ngModel)]="currentLink"
+        (ngModelChange)="onClose()"
+      />
+    </label>
+    }
   </div>
+</tui-drawer>
 
-  <footer tuiAppearance="primary" class="footer">
-    <p class="footer-title">© 2025 KinoTrip (не является коммерческим продуктом)</p>
-  </footer>
+<div class="container">
+  <div class="main">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<footer tuiAppearance="primary" class="footer">
+  <p class="footer-title">
+    © 2025 KinoTrip (не является коммерческим продуктом)
+  </p>
+</footer>
 }
