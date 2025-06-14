@@ -36,8 +36,8 @@ import { headerItems, IHeaderItem } from './layout.models';
     FormsModule,
     RouterLink,
     AsyncPipe,
-    RouterOutlet
-  ],
+    RouterOutlet,
+],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

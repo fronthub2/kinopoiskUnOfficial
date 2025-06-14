@@ -33,7 +33,7 @@ import { CardSmallComponent } from './components/card-small/card-small.component
     CardSmallComponent,
     CardMobileComponent,
     PaginationComponent,
-],
+  ],
   templateUrl: './list-films.component.html',
   styleUrl: './list-films.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,13 +43,12 @@ export class ListFilmsComponent implements OnInit, OnDestroy {
   private lsService = inject(LocalStorageService);
   private dialogService = inject(TuiDialogService);
 
-  private destroy$ = new Subject<void>();
+  private _destroy = new Subject<void>();
   private _films = new BehaviorSubject<IFilm[]>([]);
 
   breakpoint$ = inject(TuiBreakpointService);
 
   films$ = this._films.asObservable();
-
 
   page: number = 0;
   totalPages: number = 10;
@@ -67,10 +66,11 @@ export class ListFilmsComponent implements OnInit, OnDestroy {
           this.totalPages = resp.totalPages;
         }),
         map((resp: IResponce) => resp.items),
-        takeUntil(this.destroy$)
+        takeUntil(this._destroy)
       )
       .subscribe({
         next: (films: IFilm[]) => this._films.next(films),
+        error: (err) => console.log(err),
       });
   }
 
@@ -111,7 +111,7 @@ export class ListFilmsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this._destroy.next();
+    this._destroy.complete();
   }
 }

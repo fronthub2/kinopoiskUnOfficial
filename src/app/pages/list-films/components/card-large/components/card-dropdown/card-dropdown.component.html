@@ -30,7 +30,7 @@
         <button
         class="film-details__watch-button"
         tuiButton
-        appearance="outline"
+        appearance="secondary"
         size="s"
         >
         Трейлер
@@ -45,8 +45,8 @@
 
         <div class="film-details__crew">
         <div class="film-details__crew-group">
-            <h4 class="film-details__subtitle">Актер</h4>
-            @for (actor of actors$ | async; track actor.staffId; let index = $index) { 
+            <h4 class="film-details__subtitle">Актеры</h4>
+            @for (actor of actors$ | async; track actor.staffId) { 
                 @if (actor.nameRu) {
                     <app-card-dropdown-staff 
                     class="film-details__staff" 
@@ -57,7 +57,7 @@
         </div>
 
         <div class="film-details__crew-group">
-            <h4 class="film-details__subtitle">Режиссер</h4>
+            <h4 class="film-details__subtitle">Режиссеры</h4>
             @for (director of directors$ | async; track director.staffId) {
                 @if (director.nameRu) {
                     <app-card-dropdown-staff 
@@ -68,8 +68,8 @@
         </div>
 
         <div class="film-details__crew-group">
-            <h4 class="film-details__subtitle">Продюсер</h4>
-            @for (producer of producers$ | async; track producer.staffId; let index = $index) { 
+            <h4 class="film-details__subtitle">Продюсеры</h4>
+            @for (producer of producers$ | async; track producer.staffId) { 
                 @if (producer.nameRu) {
                     <app-card-dropdown-staff
                     class="film-details__staff"

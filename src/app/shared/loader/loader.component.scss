@@ -1,7 +1,15 @@
 :host {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--tui-background-base);
+  z-index: 999;
+}
+
+h2 {
+  font-size: 32.5px;
+  letter-spacing: 3px;
+  margin-bottom: 50px;
 }

@@ -1,3 +1,10 @@
-<tui-root style="height: 100%">
+@if (loader$ | async) {
+<app-loader></app-loader>
+}
+
+<tui-root [style]="{
+  height: '100%',
+  overflow: (loader$ | async) ? 'hidden' : 'unset'
+}">
   <router-outlet></router-outlet>
 </tui-root>

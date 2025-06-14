@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { TuiLoader } from '@taiga-ui/core';
 
 @Component({
@@ -7,6 +7,4 @@ import { TuiLoader } from '@taiga-ui/core';
   templateUrl: './loader.component.html',
   styleUrl: './loader.component.scss',
 })
-export class LoaderComponent {
-  @Input() showLoader: boolean = false;
-}
+export class LoaderComponent {}
