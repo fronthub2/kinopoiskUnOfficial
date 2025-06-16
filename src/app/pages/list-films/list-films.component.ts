@@ -22,6 +22,7 @@ import { CardLargeComponent } from './components/card-large/card-large.component
 import { CardDropdownComponent } from './components/card-large/components/card-dropdown/card-dropdown.component';
 import { CardMobileComponent } from './components/card-mobile/card-mobile.component';
 import { CardSmallComponent } from './components/card-small/card-small.component';
+import { FavoriteFilmService } from '../../services/favorite-film.service';
 
 @Component({
   selector: 'app-list-films',
@@ -40,8 +41,8 @@ import { CardSmallComponent } from './components/card-small/card-small.component
 })
 export class ListFilmsComponent implements OnInit, OnDestroy {
   private fimlsService = inject(FilmsService);
-  private lsService = inject(LocalStorageService);
   private dialogService = inject(TuiDialogService);
+  private favoriteFilmService = inject(FavoriteFilmService);
 
   private _destroy = new Subject<void>();
   private _films = new BehaviorSubject<IFilm[]>([]);
@@ -75,20 +76,11 @@ export class ListFilmsComponent implements OnInit, OnDestroy {
   }
 
   addFavorite(film: IFilm): void {
-    const user = this.lsService.getUser();
-    if (!user) return;
-
-    const isFavoriteFilm = this.hasFavoriteFilm(film.kinopoiskId);
-
-    if (!isFavoriteFilm) {
-      this.lsService.addFavoriteFilm(film);
-    } else {
-      this.lsService.deleteFavoriteFilm(film.kinopoiskId);
-    }
+    this.favoriteFilmService.addFavoriteFilm(film);
   }
 
   hasFavoriteFilm(filmId: number): boolean | undefined {
-    return this.lsService.hasFavoriteFilm(filmId);
+    return this.favoriteFilmService.hasFavoriteFilm(filmId);
   }
 
   moreFilm(film: IFilm): void {

@@ -5,6 +5,9 @@ import { POLYMORPHEUS_CONTEXT } from '@taiga-ui/polymorpheus';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 import { IDialogFilm, IFilm, IStaff, ProffessionKey } from '../../../../../../interface/films.interface';
 import { GenresPipe } from '../../../../../../pipes/genres.pipe';
+import { FavoriteFilmService } from '../../../../../../services/favorite-film.service';
+import { LocalStorageService } from '../../../../../../services/localstorage.service';
+import { IconButtonComponent } from "../../../../../../shared/icon-button/icon-button.component";
 import { CardDropDownStaffComponent } from './card-dropdown-staff/card-dropdown-staff.component';
 
 @Component({
@@ -14,16 +17,18 @@ import { CardDropDownStaffComponent } from './card-dropdown-staff/card-dropdown-
     TuiButton,
     AsyncPipe,
     TuiDropdown,
-    CardDropDownStaffComponent
-  ],
+    CardDropDownStaffComponent,
+    IconButtonComponent
+],
   templateUrl: './card-dropdown.component.html',
   styleUrl: './card-dropdown.component.scss'
 })
 export class CardDropdownComponent implements OnInit {
   private dialogContext = inject<TuiDialogContext<void, IDialogFilm>>(POLYMORPHEUS_CONTEXT);
+  private favoriteFilmService = inject(FavoriteFilmService);
   private _film = new BehaviorSubject<IFilm | null>(null);
   private staff$: Observable<IStaff[]> = this.dialogContext.data.staff;
-
+  
   film$: Observable<IFilm | null> = this._film.asObservable();
 
   directors$ = this.getProffession('DIRECTOR');
@@ -40,5 +45,13 @@ export class CardDropdownComponent implements OnInit {
       map((staff) => staff.slice(0,10)),
       catchError(() => of([]))
     );
+  }
+
+  addFavoriteFilm(film:IFilm) {
+    this.favoriteFilmService.addFavoriteFilm(film);
+  }
+
+  hasFavoriteFilm(film:IFilm) {
+    return this.favoriteFilmService.hasFavoriteFilm(film.kinopoiskId);
   }
 }

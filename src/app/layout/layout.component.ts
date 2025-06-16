@@ -55,16 +55,16 @@ import {
 export class LayoutComponent implements OnInit {
   private route = inject(Router);
   private lsService = inject(LocalStorageService);
-
-  protected readonly openBgMenu = signal(false);
-  protected readonly openDropMenuAvatar = signal(false);
-
-  userName = this.lsService.getUser()?.name as string;
-
   breakpoint$ = inject(TuiBreakpointService);
+
+  openBgMenu = signal(false);
+  openDropMenuAvatar = signal(false);
+
   headerMenuItems: IHeaderItem[] = headerItems;
   dropMenuAvatarItems: IDropMenuItem[] = dropMenuAvatarItems;
+  
   currentLink!: string;
+  userName: string = this.lsService.getUser()?.name as string;
 
   ngOnInit(): void {
     this.currentLink = this.route.url;

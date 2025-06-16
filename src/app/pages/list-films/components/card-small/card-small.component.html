@@ -1,29 +1,20 @@
-<button
-  [style]="{
-    position: 'absolute',
-    borderRadius: '100%',
-    right: '10px',
-    top: '10px',
-    color: isFavoriteFilm ? 'green' : 'red'
-  }"
-  appearance="outline"
-  iconStart="@tui.heart"
+<app-icon-button
+  [film]="film"
+  (favoriteFilm)="emitAddFavorite(film)"
+  [color]="isFavoriteFilm ? 'green' : 'red'"
+  [style.position]="'absolute'"
+  [style.top.px]="10"
+  [style.right.px]="10"
   size="xs"
-  tuiIconButton
-  (click)="addFavorite(film)"
-></button>
-<button
-  [style]="{
-      position: 'absolute',
-      borderRadius: '100%',
-      right: '50px',
-      top: '10px',
-    }"
-  appearance="outline"
-  iconStart="@tui.external-link"
+></app-icon-button>
+<app-icon-button
+  [film]="film"
+  [style.position]="'absolute'"
+  [style.top.px]="10"
+  [style.right.px]="50"
   size="xs"
-  tuiIconButton
-></button>
+  icon="external-link"
+></app-icon-button>
 <div
   [style.maxHeight.px]="300"
   [style.maxWidth.px]="200"
@@ -39,12 +30,13 @@
 </div>
 <div
   [style]="{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '10px',
-          justifyContent: 'center',
-          width: '100%',
-        }"
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+    justifyContent: 'flex-start',
+    marginTop: '10px',
+    width: '100%',
+  }"
 >
   <h3>{{ film.nameRu }}</h3>
   <div
@@ -79,7 +71,7 @@
     <p>
       {{ film.ratingKinopoisk }}
     </p>
-    <p class="genres">( {{ film.genres | genres: 3 }} )</p>
+    <p class="genres">( {{ film.genres | genres : 3 }} )</p>
   </div>
   <p [style.maxWidth.px]="500" [style.textWrapStyle]="'balance'">
     {{ film.description | sliceText }}
