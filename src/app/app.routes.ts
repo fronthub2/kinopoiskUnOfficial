@@ -19,6 +19,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/list-films/list-films.component').then((c) => c.ListFilmsComponent)
       },
       {
+        path: 'favorites',
+        loadComponent: () => import('./pages/favorites/favorites.component').then((c) => c.FavoritesComponent)
+      },
+      {
         path: 'home',
         loadComponent: () => import('./pages/home/home.component').then((c) => c.HomeComponent)
       }

@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { LocalStorageService } from './localstorage.service';
 import { IFilm } from '../interface/films.interface';
+import { LocalStorageService } from './localstorage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +10,8 @@ export class FavoriteFilmService {
 
   hasFavoriteFilm(filmId: number): boolean {
     const user = this.lsService.getUser();
-    if (!user) {
-      // this.router.navigate(['/login']);
+
+    if (!user?.favoritesFilms) {
       return false;
     }
 
@@ -25,12 +25,6 @@ export class FavoriteFilmService {
     const isFavoriteFilm = this.hasFavoriteFilm(film.kinopoiskId);
 
     if (!isFavoriteFilm) {
-      const user = this.lsService.getUser();
-      if (!user) {
-        // this.router.navigate(['/login']);
-        return;
-      }
-
       user.favoritesFilms.push(film);
       this.lsService.setUser(user);
     } else {
@@ -40,14 +34,10 @@ export class FavoriteFilmService {
 
   deleteFavoriteFilm(filmId: number): void {
     const user = this.lsService.getUser();
-    if (!user) {
-      // this.router.navigate(['/login']);
-      return;
-    }
+    if (!user) return;
 
-    const arrFilms = user.favoritesFilms.filter(
-      (flm) => flm.kinopoiskId !== filmId
-    );
+    const arrFilms = user.favoritesFilms
+    .filter((flm) => flm.kinopoiskId !== filmId);
     user.favoritesFilms = arrFilms;
     this.lsService.setUser(user);
   }

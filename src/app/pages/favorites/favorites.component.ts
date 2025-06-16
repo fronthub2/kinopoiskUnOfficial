@@ -7,5 +7,4 @@ import { Component } from '@angular/core';
   styleUrl: './favorites.component.scss'
 })
 export class FavoritesComponent {
-
 }

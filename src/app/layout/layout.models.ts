@@ -20,11 +20,11 @@ export const headerItems: IHeaderItem[] = [
   },
   {
     title: 'Трейлеры',
-    link: '/',
+    link: '',
   },
   {
     title: 'Избранные',
-    link: '/',
+    link: '/favorites',
   },
 ];
 
@@ -33,5 +33,10 @@ export const dropMenuAvatarItems: IDropMenuItem[] = [
     title: 'Выйти',
     link: '/login',
     icon: 'log-out',
+  },
+  {
+    title: 'Настройки',
+    link: '',
+    icon: 'settings',
   }
 ]

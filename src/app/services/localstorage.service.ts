@@ -5,13 +5,16 @@ import { IUser } from '../interface/user.interface';
   providedIn: 'root',
 })
 export class LocalStorageService {
-  constructor() {}
-
   getUser(): IUser | null {
     const user = localStorage.getItem('user');
     if (!user) return null;
-
-    return JSON.parse(user);
+  
+    try {
+      return JSON.parse(user) as IUser;
+    } catch (error) {
+      console.error('Error parsing user in localStorage', error);
+      return null;
+    }
   }
 
   setUser(user: IUser): void {

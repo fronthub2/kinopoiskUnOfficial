@@ -60,11 +60,20 @@
         <tui-data-list [size]="'s'">
           @for (item of dropMenuAvatarItems; track item.link) {
             @if (item.link === '/login') {
-              <button [iconStart]="'@tui.log-out'" [routerLink]="item.link" tuiOption (click)="onLogout()">
+              <button 
+              [iconStart]="'@tui.log-out'" 
+              [routerLink]="item.link" 
+              tuiOption 
+              (click)="onLogout()" 
+              [style.justifyContent]="'unset'">
                 {{ item.title }}
               </button>
             } @else {
-              <button [routerLink]="item.link" tuiOption>
+              <button 
+              [iconStart]="'@tui.' + item.icon" 
+              [routerLink]="item.link" 
+              tuiOption 
+              [style.justifyContent]="'unset'">
                 {{ item.title }}
               </button>
             }
