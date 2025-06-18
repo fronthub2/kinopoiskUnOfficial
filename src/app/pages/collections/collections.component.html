@@ -1,0 +1,6 @@
+<app-list-films
+    [films$]="films$"
+    [totalPages]="totalPages"
+    [page]="page"
+    (changePage)="goToPage($event)"
+></app-list-films>

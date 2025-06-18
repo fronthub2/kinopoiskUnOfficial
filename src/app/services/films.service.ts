@@ -36,3 +36,5 @@ export class FilmsService {
     return this.getRequest<IStaff[]>('v1', endpoint);
   }
 }
+
+// сделать компонент list-film переиспользованным, вызывать его в компонентах и передавать api для рендеринга карточек

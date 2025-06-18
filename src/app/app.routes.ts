@@ -16,7 +16,7 @@ export const routes: Routes = [
       },
       {
         path: 'collections',
-        loadComponent: () => import('./pages/list-films/list-films.component').then((c) => c.ListFilmsComponent)
+        loadComponent: () => import('./pages/collections/collections.component').then((c) => c.CollectionsComponent)
       },
       {
         path: 'favorites',
