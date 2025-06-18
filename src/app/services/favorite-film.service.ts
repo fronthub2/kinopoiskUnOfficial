@@ -8,6 +8,13 @@ import { LocalStorageService } from './localstorage.service';
 export class FavoriteFilmService {
   private lsService = inject(LocalStorageService);
 
+  getFavoriteFilm(): IFilm[] | null {
+    const user = this.lsService.getUser();
+    if (!user) return null;
+
+    return user.favoritesFilms;
+  }
+
   hasFavoriteFilm(filmId: number): boolean {
     const user = this.lsService.getUser();
 
@@ -36,8 +43,9 @@ export class FavoriteFilmService {
     const user = this.lsService.getUser();
     if (!user) return;
 
-    const arrFilms = user.favoritesFilms
-    .filter((flm) => flm.kinopoiskId !== filmId);
+    const arrFilms = user.favoritesFilms.filter(
+      (flm) => flm.kinopoiskId !== filmId
+    );
     user.favoritesFilms = arrFilms;
     this.lsService.setUser(user);
   }

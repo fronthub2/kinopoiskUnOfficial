@@ -1,0 +1,21 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 100%;
+}
+
+.error__title {
+    font-size: 100px;
+    margin-bottom: 50px;
+}
+
+.error {
+    max-width: 300px;
+}
+
+.error__image {
+    width: 100%;
+}
+

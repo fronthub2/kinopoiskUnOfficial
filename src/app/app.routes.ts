@@ -33,4 +33,12 @@ export const routes: Routes = [
     component: LoginComponent,
     canActivate: [authGuard],
   },
+  {
+    path: '404',
+    loadComponent: () => import('./pages/not-found-pages/not-found-pages.component').then((c) => c.NotFoundPagesComponent)
+  },
+  {
+    path: '**',
+    redirectTo: '/404',
+  }
 ];

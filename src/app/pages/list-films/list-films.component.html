@@ -36,11 +36,13 @@
     </div>
   } 
   
-  <div [style.margin]="'20px 0'">
-    <app-pagination
-      [page]="page"
-      [totalPages]="totalPages"
-      (changePage)="goToPage($event)"
-   ></app-pagination>
-  </div>
+  @if (totalPages) {
+    <div [style.margin]="'20px 0'">
+      <app-pagination
+        [page]="page"
+        [totalPages]="totalPages"
+        (changePage)="goToPage($event)"
+     ></app-pagination>
+    </div>
+  }
 }
