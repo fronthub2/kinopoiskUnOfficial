@@ -1,26 +1,26 @@
 import { AsyncPipe } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  inject,
-  Input,
-  Output
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    inject,
+    Input,
+    Output
 } from '@angular/core';
 import {
-  TuiAppearance,
-  TuiBreakpointService,
-  TuiDialogService,
+    TuiAppearance,
+    TuiBreakpointService,
+    TuiDialogService,
 } from '@taiga-ui/core';
 import { TuiCardLarge } from '@taiga-ui/layout';
 import { PolymorpheusComponent } from '@taiga-ui/polymorpheus';
 import {
-  Observable
+    Observable
 } from 'rxjs';
 import { IFilm } from '../../interface/films.interface';
 import { FavoriteFilmService } from '../../services/favorite-film.service';
 import { FilmsService } from '../../services/films.service';
-import { PaginationComponent } from '../../shared/pagination/pagination.component';
+import { PaginationComponent } from '../pagination/pagination.component';
 import { CardLargeComponent } from './components/card-large/card-large.component';
 import { CardDropdownComponent } from './components/card-large/components/card-dropdown/card-dropdown.component';
 import { CardMobileComponent } from './components/card-mobile/card-mobile.component';

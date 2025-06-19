@@ -2,7 +2,7 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, map, Subject, takeUntil, tap } from 'rxjs';
 import { IFilm, IResponce } from '../../interface/films.interface';
 import { FilmsService } from '../../services/films.service';
-import { ListFilmsComponent } from '../list-films/list-films.component';
+import { ListFilmsComponent } from '../../shared/list-films/list-films.component';
 
 @Component({
   selector: 'app-collections',

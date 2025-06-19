@@ -32,7 +32,6 @@ export class FilmsService {
 
   getStaffFilm(filmId: number): Observable<IStaff[]> {
     const endpoint = `staff?filmId=${filmId}`;
-
     return this.getRequest<IStaff[]>('v1', endpoint);
   }
 }

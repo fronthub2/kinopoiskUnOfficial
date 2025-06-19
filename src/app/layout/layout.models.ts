@@ -19,10 +19,6 @@ export const headerItems: IHeaderItem[] = [
     link: '/collections',
   },
   {
-    title: 'Трейлеры',
-    link: '/trailer',
-  },
-  {
     title: 'Избранные',
     link: '/favorites',
   },

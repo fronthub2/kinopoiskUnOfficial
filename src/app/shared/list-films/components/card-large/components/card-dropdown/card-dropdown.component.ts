@@ -6,9 +6,9 @@ import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 import { IDialogFilm, IFilm, IStaff, ProffessionKey } from '../../../../../../interface/films.interface';
 import { GenresPipe } from '../../../../../../pipes/genres.pipe';
 import { FavoriteFilmService } from '../../../../../../services/favorite-film.service';
-import { LocalStorageService } from '../../../../../../services/localstorage.service';
-import { IconButtonComponent } from "../../../../../../shared/icon-button/icon-button.component";
+import { IconButtonComponent } from "../../../../../icon-button/icon-button.component";
 import { CardDropDownStaffComponent } from './card-dropdown-staff/card-dropdown-staff.component';
+import { VideoFilmComponent } from "../../../../../video-film/video-film.component";
 
 @Component({
   selector: 'app-card-dropdown',
@@ -18,7 +18,8 @@ import { CardDropDownStaffComponent } from './card-dropdown-staff/card-dropdown-
     AsyncPipe,
     TuiDropdown,
     CardDropDownStaffComponent,
-    IconButtonComponent
+    IconButtonComponent,
+    VideoFilmComponent
 ],
   templateUrl: './card-dropdown.component.html',
   styleUrl: './card-dropdown.component.scss'

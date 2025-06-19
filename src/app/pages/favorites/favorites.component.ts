@@ -1,9 +1,8 @@
-import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { IFilm } from '../../interface/films.interface';
 import { FavoriteFilmService } from '../../services/favorite-film.service';
-import { ListFilmsComponent } from "../list-films/list-films.component";
+import { ListFilmsComponent } from "../../shared/list-films/list-films.component";
 
 @Component({
   selector: 'app-favorites',
