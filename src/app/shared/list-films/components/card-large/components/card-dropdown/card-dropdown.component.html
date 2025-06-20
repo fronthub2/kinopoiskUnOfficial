@@ -33,8 +33,9 @@
         [alt]="film.nameRu"
       />
       <button tuiButton appearance="primary" size="s">Смотреть</button>
-      <!-- <button tuiButton appearance="secondary" size="s">Трейлер</button> -->
-      
+      <button tuiButton appearance="secondary" size="s" (click)="openTrailer()">
+        Трейлер
+      </button>
     </div>
 
     <div class="film-details__description-section">
@@ -80,4 +81,4 @@
     </div>
   </div>
 </div>
-}
+} 

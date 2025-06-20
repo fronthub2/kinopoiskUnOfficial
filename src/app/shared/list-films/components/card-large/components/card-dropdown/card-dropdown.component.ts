@@ -1,14 +1,27 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
-import { TuiButton, TuiDialogContext, TuiDropdown } from '@taiga-ui/core';
-import { POLYMORPHEUS_CONTEXT } from '@taiga-ui/polymorpheus';
+import { Component, inject, Injector, OnInit } from '@angular/core';
+import {
+  TuiButton,
+  TuiDialogContext,
+  TuiDialogService,
+  TuiDropdown,
+} from '@taiga-ui/core';
+import {
+  POLYMORPHEUS_CONTEXT,
+  PolymorpheusComponent,
+} from '@taiga-ui/polymorpheus';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
-import { IDialogFilm, IFilm, IStaff, ProffessionKey } from '../../../../../../interface/films.interface';
+import {
+  IDialogFilm,
+  IFilm,
+  IStaff,
+  ProffessionKey,
+} from '../../../../../../interface/films.interface';
 import { GenresPipe } from '../../../../../../pipes/genres.pipe';
 import { FavoriteFilmService } from '../../../../../../services/favorite-film.service';
-import { IconButtonComponent } from "../../../../../icon-button/icon-button.component";
+import { IconButtonComponent } from '../../../../../icon-button/icon-button.component';
+import { VideoFilmComponent } from '../../../../../video-film/video-film.component';
 import { CardDropDownStaffComponent } from './card-dropdown-staff/card-dropdown-staff.component';
-import { VideoFilmComponent } from "../../../../../video-film/video-film.component";
 
 @Component({
   selector: 'app-card-dropdown',
@@ -19,17 +32,21 @@ import { VideoFilmComponent } from "../../../../../video-film/video-film.compone
     TuiDropdown,
     CardDropDownStaffComponent,
     IconButtonComponent,
-    VideoFilmComponent
-],
+  ],
   templateUrl: './card-dropdown.component.html',
-  styleUrl: './card-dropdown.component.scss'
+  styleUrl: './card-dropdown.component.scss',
 })
 export class CardDropdownComponent implements OnInit {
-  private dialogContext = inject<TuiDialogContext<void, IDialogFilm>>(POLYMORPHEUS_CONTEXT);
+  private dialogContext =
+    inject<TuiDialogContext<void, IDialogFilm>>(POLYMORPHEUS_CONTEXT);
+
+  private dialogService = inject(TuiDialogService);
+  private injector = inject(Injector);
+
   private favoriteFilmService = inject(FavoriteFilmService);
   private _film = new BehaviorSubject<IFilm | null>(null);
   private staff$: Observable<IStaff[]> = this.dialogContext.data.staff;
-  
+
   film$: Observable<IFilm | null> = this._film.asObservable();
 
   directors$ = this.getProffession('DIRECTOR');
@@ -43,16 +60,24 @@ export class CardDropdownComponent implements OnInit {
   private getProffession(key: ProffessionKey): Observable<IStaff[]> {
     return this.staff$.pipe(
       map((staff) => staff.filter((person) => person.professionKey === key)),
-      map((staff) => staff.slice(0,10)),
+      map((staff) => staff.slice(0, 10)),
       catchError(() => of([]))
     );
   }
 
-  addFavoriteFilm(film:IFilm) {
+  addFavoriteFilm(film: IFilm) {
     this.favoriteFilmService.addFavoriteFilm(film);
   }
 
-  hasFavoriteFilm(film:IFilm) {
+  hasFavoriteFilm(film: IFilm) {
     return this.favoriteFilmService.hasFavoriteFilm(film.kinopoiskId);
+  }
+
+  openTrailer() {
+    this.dialogService
+      .open(new PolymorpheusComponent(VideoFilmComponent, this.injector), {
+        size: 'fullscreen'
+      })
+      .subscribe();
   }
 }
