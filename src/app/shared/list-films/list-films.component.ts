@@ -17,14 +17,14 @@ import { PolymorpheusComponent } from '@taiga-ui/polymorpheus';
 import {
   Observable
 } from 'rxjs';
-import { IFilm } from '../../interface/films.interface';
+import { CardLargeComponent } from '../../features/films/ui/cards/card-large/card-large.component';
+import { CardDropdownComponent } from '../../features/films/ui/cards/card-large/components/card-dropdown/card-dropdown.component';
+import { CardMobileComponent } from '../../features/films/ui/cards/card-mobile/card-mobile.component';
+import { CardSmallComponent } from '../../features/films/ui/cards/card-small/card-small.component';
 import { FavoriteFilmService } from '../../services/favorite-film.service';
 import { FilmsService } from '../../services/films.service';
-import { PaginationComponent } from '../pagination/pagination.component';
-import { CardLargeComponent } from './components/card-large/card-large.component';
-import { CardDropdownComponent } from './components/card-large/components/card-dropdown/card-dropdown.component';
-import { CardMobileComponent } from './components/card-mobile/card-mobile.component';
-import { CardSmallComponent } from './components/card-small/card-small.component';
+import { IFilm } from '../interface/films.interface';
+import { PaginationComponent } from '../ui/pagination/pagination.component';
 
 @Component({
   selector: 'app-list-films',

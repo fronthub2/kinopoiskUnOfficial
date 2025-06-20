@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IFilm } from '../../../../interface/films.interface';
+import { IFilm } from '../../../../../shared/interface/films.interface';
 
 @Component({
   selector: 'app-card-large',

@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { IFilm } from '../interface/films.interface';
+import { IFilm } from '../shared/interface/films.interface';
 import { LocalStorageService } from './localstorage.service';
 
 @Injectable({

@@ -11,7 +11,7 @@ import {
 } from '@angular/router';
 import { TuiRoot } from '@taiga-ui/core';
 import { LoaderService } from './services/loader.service';
-import { LoaderComponent } from './shared/loader/loader.component';
+import { LoaderComponent } from './shared/ui/loader/loader.component';
 
 @Component({
   selector: 'app-root',

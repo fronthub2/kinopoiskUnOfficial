@@ -1,6 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, map, Subject, takeUntil, tap } from 'rxjs';
-import { IFilm, IResponce } from '../../interface/films.interface';
+import { IFilm, IResponce } from '../../shared/interface/films.interface';
 import { FilmsService } from '../../services/films.service';
 import { ListFilmsComponent } from '../../shared/list-films/list-films.component';
 

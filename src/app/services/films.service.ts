@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IResponce, IStaff } from '../interface/films.interface';
+import { IResponce, IStaff } from '../shared/interface/films.interface';
 
 @Injectable({
   providedIn: 'root',

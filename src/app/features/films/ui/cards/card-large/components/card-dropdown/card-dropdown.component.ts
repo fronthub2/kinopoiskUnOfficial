@@ -11,16 +11,12 @@ import {
   PolymorpheusComponent,
 } from '@taiga-ui/polymorpheus';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
-import {
-  IDialogFilm,
-  IFilm,
-  IStaff,
-  ProffessionKey,
-} from '../../../../../../interface/films.interface';
-import { GenresPipe } from '../../../../../../pipes/genres.pipe';
-import { FavoriteFilmService } from '../../../../../../services/favorite-film.service';
-import { IconButtonComponent } from '../../../../../icon-button/icon-button.component';
-import { VideoFilmComponent } from '../../../../../video-film/video-film.component';
+import { FavoriteFilmService } from '../../../../../../../services/favorite-film.service';
+
+import { IDialogFilm, IFilm, IStaff, ProffessionKey } from '../../../../../../../shared/interface/films.interface';
+import { GenresPipe } from '../../../../../../../shared/pipes/genres.pipe';
+import { IconButtonComponent } from '../../../../../../../shared/ui/icon-button/icon-button.component';
+import { VideoFilmComponent } from '../../../../video-film/video-film.component';
 import { CardDropDownStaffComponent } from './card-dropdown-staff/card-dropdown-staff.component';
 
 @Component({

@@ -1,33 +1,33 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
+    FormControl,
+    FormGroup,
+    ReactiveFormsModule,
+    Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TUI_FALSE_HANDLER } from '@taiga-ui/cdk';
 import {
-  TuiAppearance,
-  TuiButton,
-  TuiError,
-  TuiTextfield,
+    TuiAppearance,
+    TuiButton,
+    TuiError,
+    TuiTextfield,
 } from '@taiga-ui/core';
 import { TuiButtonLoading } from '@taiga-ui/kit';
 import { TuiCardLarge, TuiForm } from '@taiga-ui/layout';
 import {
-  BehaviorSubject,
-  finalize,
-  map,
-  startWith,
-  Subject,
-  switchMap,
-  timer,
+    BehaviorSubject,
+    finalize,
+    map,
+    startWith,
+    Subject,
+    switchMap,
+    timer,
 } from 'rxjs';
-import { IUser } from '../../interface/user.interface';
 import { LocalStorageService } from '../../services/localstorage.service';
-import { ErrorNamePipe } from '../../pipes/error-name.pipe';
+import { IUser } from '../../shared/interface/user.interface';
+import { ErrorNamePipe } from '../../shared/pipes/error-name.pipe';
 
 @Component({
   selector: 'app-login',
