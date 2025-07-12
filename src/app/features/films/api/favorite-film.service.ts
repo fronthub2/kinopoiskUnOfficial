@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { IFilm } from '../shared/interface/films.interface';
-import { LocalStorageService } from './localstorage.service';
+import { IFilm } from '../../../shared/interface/films.interface';
+import { LocalStorageService } from '../../../shared/services/localstorage.service';
 
 @Injectable({
   providedIn: 'root',

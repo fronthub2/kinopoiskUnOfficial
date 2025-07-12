@@ -10,7 +10,8 @@ import {
   RouterOutlet,
 } from '@angular/router';
 import { TuiRoot } from '@taiga-ui/core';
-import { LoaderService } from './services/loader.service';
+import { LoaderService } from './shared/services/loader.service';
+import { SkeletonService } from './shared/services/skeleton.service';
 import { LoaderComponent } from './shared/ui/loader/loader.component';
 
 @Component({
@@ -20,6 +21,7 @@ import { LoaderComponent } from './shared/ui/loader/loader.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
+  private skeletonService = inject(SkeletonService);
   private loaderService = inject(LoaderService);
   private router = inject(Router);
 
@@ -30,12 +32,14 @@ export class AppComponent implements OnInit {
       switch (true) {
         case event instanceof NavigationStart:
           this.loaderService.setLoader(true);
+          this.skeletonService.setSkeleton(true);
           break;
 
         case event instanceof NavigationEnd:
         case event instanceof NavigationCancel:
         case event instanceof NavigationError:
           setTimeout(() => this.loaderService.setLoader(false), 1500);
+          setTimeout(() => this.skeletonService.setSkeleton(false), 2000);
           break;
       }
     });

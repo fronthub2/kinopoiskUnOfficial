@@ -1,21 +1,26 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, map, Subject, takeUntil, tap } from 'rxjs';
+import { FilmsService } from '../../features/films/api/films.api.service';
 import { IFilm, IResponce } from '../../shared/interface/films.interface';
-import { FilmsService } from '../../services/films.service';
 import { ListFilmsComponent } from '../../shared/list-films/list-films.component';
+import { SkeletonService } from '../../shared/services/skeleton.service';
+import { TuiSkeleton } from '@taiga-ui/kit';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-collections',
-  imports: [ListFilmsComponent],
+  imports: [ListFilmsComponent, TuiSkeleton, AsyncPipe],
   templateUrl: './collections.component.html',
   styleUrl: './collections.component.scss',
 })
 export class CollectionsComponent implements OnInit, OnDestroy {
   private fimlsService = inject(FilmsService);
+  private skeletonService = inject(SkeletonService);
   private _films = new BehaviorSubject<IFilm[]>([]);
   private _destroy = new Subject<void>();
 
   films$ = this._films.asObservable();
+  isSkeleton$ = this.skeletonService.getSkeleton();
 
   totalPages: number = 0;
   page: number = 0;

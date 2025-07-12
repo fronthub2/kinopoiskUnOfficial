@@ -1,5 +1,5 @@
 @if (favoriteFilms?.length !== 0) {
-    <app-list-films [films$]="films$"></app-list-films>
+    <app-list-films [films$]="films$" [tuiSkeleton]="(isSkeleton$ | async) || false"></app-list-films>
 } @else {
     <h3 [style.marginTop.px]="30">Нет избранных фильмов</h3>
 }

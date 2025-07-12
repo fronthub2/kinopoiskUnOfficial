@@ -1,33 +1,31 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
-    FormControl,
-    FormGroup,
-    ReactiveFormsModule,
-    Validators,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { TUI_FALSE_HANDLER } from '@taiga-ui/cdk';
 import {
-    TuiAppearance,
-    TuiButton,
-    TuiError,
-    TuiTextfield,
+  TuiAppearance,
+  TuiButton,
+  TuiError,
+  TuiTextfield,
 } from '@taiga-ui/core';
 import { TuiButtonLoading } from '@taiga-ui/kit';
 import { TuiCardLarge, TuiForm } from '@taiga-ui/layout';
 import {
-    BehaviorSubject,
-    finalize,
-    map,
-    startWith,
-    Subject,
-    switchMap,
-    timer,
+  BehaviorSubject,
+  finalize,
+  map,
+  startWith,
+  Subject,
+  switchMap,
+  timer,
 } from 'rxjs';
-import { LocalStorageService } from '../../services/localstorage.service';
-import { IUser } from '../../shared/interface/user.interface';
-import { ErrorNamePipe } from '../../shared/pipes/error-name.pipe';
+import { AuthService } from '../../api/auth.service';
+import { ErrorNamePipe } from '../../pipes/error-name.pipe';
 
 @Component({
   selector: 'app-login',
@@ -48,12 +46,12 @@ import { ErrorNamePipe } from '../../shared/pipes/error-name.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
+  private authService = inject(AuthService);
   private trigger$ = new Subject<void>();
-  isError$ = new BehaviorSubject<boolean>(false);
+  private _error = new BehaviorSubject<boolean>(false);
 
-  private router = inject(Router);
-  private lsService = inject(LocalStorageService);
-
+  error$ = this._error.asObservable();
+  
   form = new FormGroup(
     {
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -68,25 +66,17 @@ export class LoginComponent {
       timer(2000).pipe(
         map(TUI_FALSE_HANDLER),
         startWith('Loading'),
-        finalize(() => {
-          const user: IUser = {
-            name: this.form.controls.name.value as string,
-            favoritesFilms: [],
-          };
-          this.lsService.setUser(user);
-          this.router.navigate(['']);
-          this.form.reset();
-        })
+        finalize(() => this.authService.login(this.form.value.name as string))
       )
     )
   );
 
   onSubmit() {
     if (this.form.invalid) {
-      this.isError$.next(true);
+      this._error.next(true);
       return;
     }
-    this.isError$.next(false);
+    this._error.next(false);
     this.trigger$.next();
   }
 }

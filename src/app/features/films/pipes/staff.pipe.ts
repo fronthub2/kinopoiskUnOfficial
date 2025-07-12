@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IStaff, ProffessionKey } from '../interface/films.interface';
+import { IStaff, ProffessionKey } from '../../../shared/interface/films.interface';
 
 @Pipe({
   name: 'staff'

@@ -1,6 +1,8 @@
 <app-list-films
     [films$]="films$"
     [totalPages]="totalPages"
+    [tuiSkeleton]="(isSkeleton$ | async) || false"
+
     [page]="page"
     (changePage)="goToPage($event)"
 ></app-list-films>

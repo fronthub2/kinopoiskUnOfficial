@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ICountry } from '../interface/films.interface';
+import { ICountry } from '../../../shared/interface/films.interface';
 
 @Pipe({
   name: 'country',

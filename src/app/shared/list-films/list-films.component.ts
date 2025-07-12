@@ -17,13 +17,14 @@ import { PolymorpheusComponent } from '@taiga-ui/polymorpheus';
 import {
   Observable
 } from 'rxjs';
+import { FavoriteFilmService } from '../../features/films/api/favorite-film.service';
+import { FilmsService } from '../../features/films/api/films.api.service';
 import { CardLargeComponent } from '../../features/films/ui/cards/card-large/card-large.component';
 import { CardDropdownComponent } from '../../features/films/ui/cards/card-large/components/card-dropdown/card-dropdown.component';
 import { CardMobileComponent } from '../../features/films/ui/cards/card-mobile/card-mobile.component';
 import { CardSmallComponent } from '../../features/films/ui/cards/card-small/card-small.component';
-import { FavoriteFilmService } from '../../services/favorite-film.service';
-import { FilmsService } from '../../services/films.service';
 import { IFilm } from '../interface/films.interface';
+import { SkeletonService } from '../services/skeleton.service';
 import { PaginationComponent } from '../ui/pagination/pagination.component';
 
 @Component({
@@ -45,6 +46,7 @@ export class ListFilmsComponent {
   private fimlsService = inject(FilmsService);
   private dialogService = inject(TuiDialogService);
   private favoriteFilmService = inject(FavoriteFilmService);
+  private skeletonService = inject(SkeletonService);
 
   breakpoint$ = inject(TuiBreakpointService);
 

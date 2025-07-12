@@ -20,13 +20,13 @@ import {
 } from '@taiga-ui/core';
 import { TuiAvatar, TuiChip, TuiDrawer } from '@taiga-ui/kit';
 import { TuiItemGroup } from '@taiga-ui/layout';
-import { LocalStorageService } from '../services/localstorage.service';
 import {
   dropMenuAvatarItems,
   headerItems,
   IDropMenuItem,
   IHeaderItem,
-} from './layout.models';
+} from './layout.model';
+import { LocalStorageService } from '../shared/services/localstorage.service';
 
 @Component({
   selector: 'app-layout',

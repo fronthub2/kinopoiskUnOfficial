@@ -10,12 +10,23 @@ import {
   POLYMORPHEUS_CONTEXT,
   PolymorpheusComponent,
 } from '@taiga-ui/polymorpheus';
-import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
-import { FavoriteFilmService } from '../../../../../../../services/favorite-film.service';
+import {
+  BehaviorSubject,
+  catchError,
+  map,
+  Observable,
+  of
+} from 'rxjs';
+import { FavoriteFilmService } from '../../../../../api/favorite-film.service';
 
-import { IDialogFilm, IFilm, IStaff, ProffessionKey } from '../../../../../../../shared/interface/films.interface';
-import { GenresPipe } from '../../../../../../../shared/pipes/genres.pipe';
+import {
+  IDialogFilm,
+  IFilm,
+  IStaff,
+  ProffessionKey,
+} from '../../../../../../../shared/interface/films.interface';
 import { IconButtonComponent } from '../../../../../../../shared/ui/icon-button/icon-button.component';
+import { GenresPipe } from '../../../../../pipes/genres.pipe';
 import { VideoFilmComponent } from '../../../../video-film/video-film.component';
 import { CardDropDownStaffComponent } from './card-dropdown-staff/card-dropdown-staff.component';
 
@@ -33,8 +44,7 @@ import { CardDropDownStaffComponent } from './card-dropdown-staff/card-dropdown-
   styleUrl: './card-dropdown.component.scss',
 })
 export class CardDropdownComponent implements OnInit {
-  private dialogContext =
-    inject<TuiDialogContext<void, IDialogFilm>>(POLYMORPHEUS_CONTEXT);
+  private dialogContext = inject<TuiDialogContext<void, IDialogFilm>>(POLYMORPHEUS_CONTEXT);
 
   private dialogService = inject(TuiDialogService);
   private injector = inject(Injector);
@@ -49,7 +59,7 @@ export class CardDropdownComponent implements OnInit {
   actors$ = this.getProffession('ACTOR');
   producers$ = this.getProffession('PRODUCER');
 
-  ngOnInit() {
+  ngOnInit(): void {
     this._film.next(this.dialogContext.data.film);
   }
 
@@ -61,18 +71,22 @@ export class CardDropdownComponent implements OnInit {
     );
   }
 
-  addFavoriteFilm(film: IFilm) {
+  addFavoriteFilm(film: IFilm): void {
     this.favoriteFilmService.addFavoriteFilm(film);
   }
 
-  hasFavoriteFilm(film: IFilm) {
+  hasFavoriteFilm(film: IFilm): boolean {
     return this.favoriteFilmService.hasFavoriteFilm(film.kinopoiskId);
   }
 
-  openTrailer() {
+  openTrailer(): void {
     this.dialogService
       .open(new PolymorpheusComponent(VideoFilmComponent, this.injector), {
-        size: 'fullscreen'
+        size: 'auto',
+        closeable: false,
+        data: {
+          filmId: this.dialogContext.data.film.kinopoiskId
+        }
       })
       .subscribe();
   }

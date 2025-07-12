@@ -13,10 +13,10 @@
         formControlName="name"
         placeholder="Введите свое имя"
         tuiTextfield
-        [invalid]="isError$ | async"
+        [invalid]="error$ | async"
       />
     </tui-textfield>
-    @if (isError$ | async) {
+    @if (error$ | async) {
     <tui-error [error]="form.controls.name.errors | errorName" />
     }
     <button
