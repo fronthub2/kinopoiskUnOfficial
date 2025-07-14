@@ -1,4 +1,4 @@
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 
 export type ProffessionKey =
   | 'DIRECTOR'
@@ -40,8 +40,7 @@ export interface IStaff {
   professionKey: ProffessionKey;
 }
 
-
-export interface IDialogFilm{
+export interface IDialogFilm {
   film: IFilm;
   staff: Observable<IStaff[]>;
 }

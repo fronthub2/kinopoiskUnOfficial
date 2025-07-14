@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IResponce, IStaff } from '../../../shared/interface/films.interface';
+import {
+  IResponce,
+  IStaff,
+} from '../../../shared/interface/films.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -34,10 +37,5 @@ export class FilmsService {
   getStaffFilm(filmId: number): Observable<IStaff[]> {
     const endpoint = `staff?filmId=${filmId}`;
     return this.getRequest<IStaff[]>('v1', endpoint);
-  }
-
-  getTrailerFilm(filmId:number): Observable<any> {
-    const endpoint = `films/${filmId}/videos`;
-    return this.getRequest<any>('v2.2', endpoint);
   }
 }

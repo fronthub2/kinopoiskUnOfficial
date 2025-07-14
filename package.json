@@ -19,7 +19,6 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
-    "@angular/youtube-player": "^19.0.0",
     "@taiga-ui/addon-mobile": "^4.37.0",
     "@taiga-ui/addon-table": "^4.37.0",
     "@taiga-ui/cdk": "^4.37.0",

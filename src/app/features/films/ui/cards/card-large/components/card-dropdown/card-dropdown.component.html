@@ -9,18 +9,18 @@
           alignItems: 'center'
         }"
       >
-        <h2 class="film-details__title">{{ film.nameRu }}</h2>
+        <h2 class="film-details__title" [tuiSkeleton]="(isSkeletonCardDropDown$ | async) || false">{{ film.nameRu }}</h2>
         <app-icon-button
           [film]="film"
           (favoriteFilm)="addFavoriteFilm($event)"
           [color]="hasFavoriteFilm(film) ? 'green' : 'red'"
         ></app-icon-button>
       </div>
-      <p class="film-details__genres">{{ film.genres | genres : 3 }}</p>
+      <p class="film-details__genres" [tuiSkeleton]="(isSkeletonCardDropDown$ | async) || false">{{ film.genres | genres : 3 }}</p>
       @if (film.ratingKinopoisk) {
-      <p class="film-details__rating">{{ film.ratingKinopoisk }} / 10</p>
+      <p class="film-details__rating" [tuiSkeleton]="(isSkeletonCardDropDown$ | async) || false">{{ film.ratingKinopoisk }} / 10</p>
       } @else {
-      <p class="film-details__rating">Без рейтинга</p>
+      <p class="film-details__rating" [tuiSkeleton]="(isSkeletonCardDropDown$ | async) || false">Без рейтинга</p>
       }
     </div>
   </div>
@@ -28,12 +28,13 @@
   <div class="film-details__content">
     <div class="film-details__poster-section">
       <img
+      [tuiSkeleton]="(isSkeletonCardDropDown$ | async) || false"
         class="film-details__poster"
         [src]="film.posterUrl"
         [alt]="film.nameRu"
       />
       <button tuiButton appearance="primary" size="s">Смотреть</button>
-      <button tuiButton appearance="secondary" size="s" (click)="openTrailer()">
+      <button tuiButton appearance="secondary" size="s">
         Трейлер
       </button>
     </div>
@@ -41,42 +42,51 @@
     <div class="film-details__description-section">
       <div class="film-details__about">
         <h4 class="film-details__subtitle">О фильме</h4>
-        <p class="film-details__text">{{ film.description }}</p>
+        <p class="film-details__text" [tuiSkeleton]="(isSkeletonCardDropDown$ | async) || false">{{ film.description }}</p>
       </div>
 
-      <div class="film-details__crew">
-        <div class="film-details__crew-group">
-          <h4 class="film-details__subtitle">Актеры</h4>
-          @for (actor of actors$ | async; track actor.staffId) { @if
-          (actor.nameRu) {
-          <app-card-dropdown-staff
-            class="film-details__staff"
-            [staff]="actor"
-          ></app-card-dropdown-staff>
-          } }
-        </div>
+      <div class="film-details__crew" [tuiSkeleton]="(isSkeletonCardDropDown$ | async) || false">
+        @if (actors$ | async; as actors) {
+          <div class="film-details__crew-group">
+            <h4 class="film-details__subtitle">Актеры</h4>
+            @for (actor of actors; track actor.staffId) { 
+              @if (actor.nameRu) {
+                <app-card-dropdown-staff
+                class="film-details__staff"
+                [staff]="actor"
+                ></app-card-dropdown-staff>
+              }
+            }
+          </div>
+        }
 
-        <div class="film-details__crew-group">
-          <h4 class="film-details__subtitle">Режиссеры</h4>
-          @for (director of directors$ | async; track director.staffId) { @if
-          (director.nameRu) {
-          <app-card-dropdown-staff
-            class="film-details__staff"
-            [staff]="director"
-          ></app-card-dropdown-staff>
-          } }
-        </div>
+        @if (directors$ | async; as directors) {
+          <div class="film-details__crew-group">
+            <h4 class="film-details__subtitle">Режиссеры</h4>
+            @for (director of directors; track director.staffId) { 
+              @if (director.nameRu) {
+                <app-card-dropdown-staff
+                class="film-details__staff"
+                [staff]="director"
+                ></app-card-dropdown-staff>
+              }
+            }
+          </div>
+        }
 
-        <div class="film-details__crew-group">
-          <h4 class="film-details__subtitle">Продюсеры</h4>
-          @for (producer of producers$ | async; track producer.staffId) { @if
-          (producer.nameRu) {
-          <app-card-dropdown-staff
-            class="film-details__staff"
-            [staff]="producer"
-          ></app-card-dropdown-staff>
-          } }
-        </div>
+        @if (producers$ | async; as producers){
+          <div class="film-details__crew-group">
+            <h4 class="film-details__subtitle">Продюсеры</h4>
+            @for (producer of producers; track producer.staffId) {
+                @if (producer.nameRu) {
+                  <app-card-dropdown-staff
+                  class="film-details__staff"
+                  [staff]="producer"
+                  ></app-card-dropdown-staff>
+                }
+              } 
+          </div>
+        }
       </div>
     </div>
   </div>
